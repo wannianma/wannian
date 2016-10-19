@@ -98,7 +98,7 @@
 <meta property="og:description" content="今天试了下用you-get下B站的视频，简单看了下源码，有不少值得借鉴的地方！
 
 动态地改变Python搜索路径1234_srcdir = &apos;%s/src/&apos; % os.path.dirname(os.path.realpath(__file__))# Sys.argv[]是用来获取命令行参数的，sys.argv[0]表示代码本身文件路径_filepath = os.path.dirname(s">
-<meta property="og:updated_time" content="2016-10-18T07:32:51.441Z">
+<meta property="og:updated_time" content="2016-10-19T06:38:59.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="you-get源码分析">
 <meta name="twitter:description" content="今天试了下用you-get下B站的视频，简单看了下源码，有不少值得借鉴的地方！
@@ -326,6 +326,7 @@
 <blockquote>
 <p>每个py文件被称之为模块，每个具有<strong>init</strong>.py文件的目录被称为包,只要模 块或者包所在的目录在sys.path中，就可以使用import 模块或import 包来使用。</p>
 </blockquote>
+<a id="more"></a>
 <h4 id="from-main-import"><a href="#from-main-import" class="headerlink" title="from .__main__ import *"></a><code>from .__main__ import *</code></h4><ul>
 <li>If the import module in the same dir, use e.g: <code>from . import core</code></li>
 <li>If the import module in the top dir, use e.g: <code>from .. import core</code></li>
