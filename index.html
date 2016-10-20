@@ -263,6 +263,121 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/20/修改Centos7笔记本盒盖后默认睡眠行为/" itemprop="url">
+                  修改Centos7笔记本盒盖后默认睡眠行为
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T09:34:33+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/20/修改Centos7笔记本盒盖后默认睡眠行为/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/修改Centos7笔记本盒盖后默认睡眠行为/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>Centos 7下笔记本合上后一般会进入休眠模式，但是可能有时候这不是我们想要的行为。</p>
+</blockquote>
+<p>Centos7下电源相关的ACPI事件均通过<code>/etc/system/logind.conf</code>进行配置，比如：</p>
+<ul>
+<li>HandlePowerKey　　　　按下电源键后的行为</li>
+<li>HandleSleepKey　　 　　按下挂起键后的行为</li>
+<li>HandleHibernateKey  　　按下休眠键后的行为</li>
+<li>HandleLidSwitch　　 　　合上笔记本盖后的行为</li>
+</ul>
+<p>对应行为可以分为:<code>ignore</code>,<code>poweroff</code>,<code>reboot</code>,<code>halt</code>,<code>suspend</code>,<code>hibernate</code>,<code>hybrid-sleep</code>,<code>lock</code>和<code>kexec</code>。</p>
+<p>其中HandleLidSwitch选项的系统默认行为为<code>suspend</code>,只需要修改对应选项配置行为为<code>lock</code>即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HandleLidSwitch=lock</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>重启后生效</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/20/配置笔记本上centos7连接Wifi/" itemprop="url">
                   配置笔记本上centos7连接Wifi
                 </a>
@@ -719,7 +834,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
