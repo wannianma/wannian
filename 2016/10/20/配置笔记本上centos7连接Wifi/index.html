@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="PHP, Python, Crawler" />
+  <meta name="keywords" content="linux配置,centos," />
 
 
 
@@ -88,15 +88,34 @@
 
 
 
-<meta name="description" content="过日子，撸代码">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wannian's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="首先检查是否安装NetworkManager-wifi，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装NetworkManager-wifi且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：
+查看是否需要安装固件1# dmesg | grep firmware
+&amp;lt;!--more--&amp;gt;
+查看无线网口1# iw dev
+
+查看并激活无线网络接口12# ip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置笔记本上centos7连接Wifi">
+<meta property="og:url" content="http://yoursite.com/2016/10/20/配置笔记本上centos7连接Wifi/index.html">
 <meta property="og:site_name" content="Wannian's Blog">
-<meta property="og:description" content="过日子，撸代码">
+<meta property="og:description" content="首先检查是否安装NetworkManager-wifi，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装NetworkManager-wifi且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：
+查看是否需要安装固件1# dmesg | grep firmware
+&amp;lt;!--more--&amp;gt;
+查看无线网口1# iw dev
+
+查看并激活无线网络接口12# ip">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6de47e09jw1f8yg8r8uefj20ni055aba.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6de47e09jw1f8ygbw9p7yj20sp02o75k.jpg">
+<meta property="og:updated_time" content="2016-10-20T01:06:34.482Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wannian's Blog">
-<meta name="twitter:description" content="过日子，撸代码">
+<meta name="twitter:title" content="配置笔记本上centos7连接Wifi">
+<meta name="twitter:description" content="首先检查是否安装NetworkManager-wifi，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装NetworkManager-wifi且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：
+查看是否需要安装固件1# dmesg | grep firmware
+&amp;lt;!--more--&amp;gt;
+查看无线网口1# iw dev
+
+查看并激活无线网络接口12# ip">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/6de47e09jw1f8yg8r8uefj20ni055aba.jpg">
 
 
 
@@ -117,10 +136,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/20/配置笔记本上centos7连接Wifi/"/>
 
 
-  <title> Wannian's Blog </title>
+  <title> 配置笔记本上centos7连接Wifi | Wannian's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -151,9 +170,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -240,9 +257,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -262,10 +279,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/10/20/配置笔记本上centos7连接Wifi/" itemprop="url">
-                  配置笔记本上centos7连接Wifi
-                </a>
+                配置笔记本上centos7连接Wifi
               
             
           </h1>
@@ -312,9 +326,7 @@
       
 
       
-        
-          
-            <p>首先检查是否安装<code>NetworkManager-wifi</code>，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装<code>NetworkManager-wifi</code>且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：</p>
+        <p>首先检查是否安装<code>NetworkManager-wifi</code>，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装<code>NetworkManager-wifi</code>且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：</p>
 <h3 id="查看是否需要安装固件"><a href="#查看是否需要安装固件" class="headerlink" title="查看是否需要安装固件"></a>查看是否需要安装固件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># dmesg | grep firmware</div></pre></td></tr></table></figure>
 <pre><code>&lt;!--more--&gt;
 </code></pre><h3 id="查看无线网口"><a href="#查看无线网口" class="headerlink" title="查看无线网口"></a>查看无线网口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># iw dev</div></pre></td></tr></table></figure>
@@ -326,368 +338,80 @@
 <h3 id="让DHCP服务分配ip"><a href="#让DHCP服务分配ip" class="headerlink" title="让DHCP服务分配ip"></a>让DHCP服务分配ip</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># dhclient wlp6so</div><div class="line">// 查看是否成功联网</div><div class="line"># ip addr show wlp6s0</div></pre></td></tr></table></figure>
 <h3 id="联网后，安装NetworkManager-wifi"><a href="#联网后，安装NetworkManager-wifi" class="headerlink" title="联网后，安装NetworkManager-wifi"></a>联网后，安装<code>NetworkManager-wifi</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># yum install NetworkManager-wifi</div></pre></td></tr></table></figure>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/18/you-get源码分析/" itemprop="url">
-                  you-get源码分析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-18T15:30:52+08:00" content="2016-10-18">
-              2016-10-18
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/linux配置/" rel="tag">#linux配置</a>
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/18/you-get源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/you-get源码分析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/centos/" rel="tag">#centos</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <blockquote>
-<p>今天试了下用you-get下B站的视频，简单看了下源码，有不少值得借鉴的地方！</p>
-</blockquote>
-<h4 id="动态地改变Python搜索路径"><a href="#动态地改变Python搜索路径" class="headerlink" title="动态地改变Python搜索路径"></a>动态地改变Python搜索路径</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">_srcdir = <span class="string">'%s/src/'</span> % os.path.dirname(os.path.realpath(__file__))</div><div class="line"><span class="comment"># Sys.argv[]是用来获取命令行参数的，sys.argv[0]表示代码本身文件路径</span></div><div class="line">_filepath = os.path.dirname(sys.argv[<span class="number">0</span>])</div><div class="line">sys.path.insert(<span class="number">1</span>, os.path.join(_filepath, _srcdir))</div></pre></td></tr></table></figure>
-<p>模块必须处于Python搜索路径中才能被导入，但你不想设置个永久性的大路径，因为那样可能会影响性能，所以，你希望能够动态地改变这个路径。</p>
-<blockquote>
-<p>解决方案</p>
-</blockquote>
-<p>只需简单地在Python的sys.path中加入一个”目录”，不过要小心重复的情况</p>
-<blockquote>
-<p>每个py文件被称之为模块，每个具有<strong>init</strong>.py文件的目录被称为包,只要模 块或者包所在的目录在sys.path中，就可以使用import 模块或import 包来使用。</p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/18/you-get源码分析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/18/you-get源码分析/" rel="next" title="you-get源码分析">
+                <i class="fa fa-chevron-left"></i> you-get源码分析
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/17/树莓派运行pyspider/" itemprop="url">
-                  树莓派运行pyspider
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-17T11:33:00+08:00" content="2016-10-17">
-              2016-10-17
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/17/树莓派运行pyspider/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/17/树莓派运行pyspider/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="在Pi上安装pySpider"><a href="#在Pi上安装pySpider" class="headerlink" title="在Pi上安装pySpider"></a>在Pi上安装pySpider</h1><h3 id="查看python版本-pip是否安装"><a href="#查看python版本-pip是否安装" class="headerlink" title="查看python版本, pip是否安装"></a>查看python版本, pip是否安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python --version</div><div class="line">$ pip -v</div></pre></td></tr></table></figure>
-<h3 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h3><p><a href="https://pip.pypa.io/en/stable/">pip官方文档</a></p>
-<ul>
-<li>使用get-pip.py安装</li>
-<li><p><a href="https://packaging.python.org/install_requirements_linux/#installing-pip-setuptools-wheel-with-linux-package-managers">linux使用软件管理器安装</a></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/17/树莓派运行pyspider/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/17/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-17T11:22:03+08:00" content="2016-10-17">
-              2016-10-17
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/17/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/17/hello-world/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p>
-<footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/20/配置笔记本上centos7连接Wifi/"
+     data-title="配置笔记本上centos7连接Wifi"
+     data-content=""
+     data-url="http://yoursite.com/2016/10/20/配置笔记本上centos7连接Wifi/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
@@ -695,6 +419,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/20/配置笔记本上centos7连接Wifi/"
+           data-title="配置笔记本上centos7连接Wifi" data-url="http://yoursite.com/2016/10/20/配置笔记本上centos7连接Wifi/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -714,8 +446,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ww3.sinaimg.cn/large/6de47e09jw1f8v1r3fwuyj20c50c5jsd.jpg"
@@ -810,6 +551,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看是否需要安装固件"><span class="nav-text">查看是否需要安装固件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看无线网口"><span class="nav-text">查看无线网口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看并激活无线网络接口"><span class="nav-text">查看并激活无线网络接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看wifi连接情况-扫描可用wifi"><span class="nav-text">查看wifi连接情况,扫描可用wifi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接指定的SSID"><span class="nav-text">连接指定的SSID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让DHCP服务分配ip"><span class="nav-text">让DHCP服务分配ip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联网后，安装NetworkManager-wifi"><span class="nav-text">联网后，安装NetworkManager-wifi</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -906,6 +658,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
