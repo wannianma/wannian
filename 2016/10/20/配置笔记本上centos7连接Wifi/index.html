@@ -89,32 +89,20 @@
 
 
 <meta name="description" content="首先检查是否安装NetworkManager-wifi，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装NetworkManager-wifi且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：
-查看是否需要安装固件1# dmesg | grep firmware
-&amp;lt;!--more--&amp;gt;
-查看无线网口1# iw dev
-
-查看并激活无线网络接口12# ip">
+查看是否需要安装固件1# dmesg | grep firmware">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置笔记本上centos7连接Wifi">
 <meta property="og:url" content="http://yoursite.com/2016/10/20/配置笔记本上centos7连接Wifi/index.html">
 <meta property="og:site_name" content="Wannian's Blog">
 <meta property="og:description" content="首先检查是否安装NetworkManager-wifi，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装NetworkManager-wifi且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：
-查看是否需要安装固件1# dmesg | grep firmware
-&amp;lt;!--more--&amp;gt;
-查看无线网口1# iw dev
-
-查看并激活无线网络接口12# ip">
+查看是否需要安装固件1# dmesg | grep firmware">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/6de47e09jw1f8yg8r8uefj20ni055aba.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/6de47e09jw1f8ygbw9p7yj20sp02o75k.jpg">
-<meta property="og:updated_time" content="2016-10-20T01:06:34.482Z">
+<meta property="og:updated_time" content="2016-10-20T01:07:53.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置笔记本上centos7连接Wifi">
 <meta name="twitter:description" content="首先检查是否安装NetworkManager-wifi，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装NetworkManager-wifi且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：
-查看是否需要安装固件1# dmesg | grep firmware
-&amp;lt;!--more--&amp;gt;
-查看无线网口1# iw dev
-
-查看并激活无线网络接口12# ip">
+查看是否需要安装固件1# dmesg | grep firmware">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/6de47e09jw1f8yg8r8uefj20ni055aba.jpg">
 
 
@@ -328,8 +316,8 @@
       
         <p>首先检查是否安装<code>NetworkManager-wifi</code>，如果已安装，则可以直接在图形界面选择wifi连接并保存即可。若未安装<code>NetworkManager-wifi</code>且旁边没有有线网络，则只能通过命令行进行连接了，具体步骤如下：</p>
 <h3 id="查看是否需要安装固件"><a href="#查看是否需要安装固件" class="headerlink" title="查看是否需要安装固件"></a>查看是否需要安装固件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># dmesg | grep firmware</div></pre></td></tr></table></figure>
-<pre><code>&lt;!--more--&gt;
-</code></pre><h3 id="查看无线网口"><a href="#查看无线网口" class="headerlink" title="查看无线网口"></a>查看无线网口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># iw dev</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="查看无线网口"><a href="#查看无线网口" class="headerlink" title="查看无线网口"></a>查看无线网口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># iw dev</div></pre></td></tr></table></figure>
 <p><img src="http://ww1.sinaimg.cn/large/6de47e09jw1f8yg8r8uefj20ni055aba.jpg" alt=""></p>
 <h3 id="查看并激活无线网络接口"><a href="#查看并激活无线网络接口" class="headerlink" title="查看并激活无线网络接口"></a>查看并激活无线网络接口</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># ip link set wlp6s0 up</div><div class="line"># ip link show wlp6s0</div></pre></td></tr></table></figure>
 <p><img src="http://ww3.sinaimg.cn/large/6de47e09jw1f8ygbw9p7yj20sp02o75k.jpg" alt=""></p>
