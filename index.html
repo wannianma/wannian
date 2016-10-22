@@ -313,31 +313,14 @@
 
       
         
-          
-            <p>写在前面，之前由于头条新闻列表页面改为js动态加载后，爬取程序崩了一次，但是由于当时当时列表API接口没有鉴权，所以选择直接请求API接口返回数据。但是好景不长，该接口添加了两个必填参数<code>as</code>和<code>cp</code>，导致list页面抓取失败！</p>
+          <p>写在前面，之前由于头条新闻列表页面改为js动态加载后，爬取程序崩了一次，但是由于当时当时列表API接口没有鉴权，所以选择直接请求API接口返回数据。但是好景不长，该接口添加了两个必填参数<code>as</code>和<code>cp</code>，导致list页面抓取失败！</p>
 <p><img src="http://ww3.sinaimg.cn/large/6de47e09jw1f911fu6swrj20qe02taad.jpg" alt=""><br><blockquote class="blockquote-center"><p>Note: 有些懒不能偷，出来混总是要还的</p>
-</blockquote></p>
-<blockquote>
-<p>解决方案：对两个<code>as</code>和<code>cp</code>生成逻辑研究了半天也没搞明白，只能选择使用phantomjs来解决。</p>
-</blockquote>
-<h2 id="搭建Phantomjs环境"><a href="#搭建Phantomjs环境" class="headerlink" title="搭建Phantomjs环境"></a>搭建Phantomjs环境</h2><p>check了一下服务器的信息，发现两台Server的配置差不多，直接将A服务器的二进制文件拷过来使用。</p>
-<ul>
-<li><p>scp拷贝文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># scp -P 202xx -r phantomjs/ root@59.63.1xx.xx:/data/live</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>将Phantomjs加入到环境变量</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># vim /etc/profile</span></div><div class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/nginx/sbin:/usr/<span class="built_in">local</span>/php/bin:/usr/<span class="built_in">local</span>/mysql/bin:/data/crawler/phantomjs/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Phantomjs代码编写"><a href="#Phantomjs代码编写" class="headerlink" title="Phantomjs代码编写"></a>Phantomjs代码编写</h2><p>由于只需要加载出今日头条第一页即可，所以使用最简单的获取<code>page.content</code>即可。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create(),</div><div class="line">    system = <span class="built_in">require</span>(<span class="string">'system'</span>),</div><div class="line">    url;</div><div class="line"></div><div class="line"><span class="comment">//page.viewportSize = &#123;width: 4800,height: 8000&#125;;</span></div><div class="line">page.settings.loadImages = <span class="literal">false</span>;</div><div class="line">page.settings.userAgent = <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36'</span>;</div><div class="line">page.settings.resourceTimeout = <span class="number">5000</span>;</div><div class="line">page.onConsoleMessage = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(msg);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (system.args.length === <span class="number">1</span>) &#123;</div><div class="line">    phantom.exit(<span class="number">1</span>);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    url = system.args[<span class="number">1</span>];</div><div class="line">    page.open(url, <span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (status !== <span class="string">'success'</span>) &#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'FAIL to load the address'</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">console</span>.log(page.content);</div><div class="line">        phantom.exit();</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="python代码获取Phantomjs输出内容"><a href="#python代码获取Phantomjs输出内容" class="headerlink" title="python代码获取Phantomjs输出内容"></a>python代码获取Phantomjs输出内容</h4><p>通过python代码执行命令行程序，获取命令行输出的方式得到页面内容<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 执行phantomjs获取网页内容</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_fetch_html_by_phantomjs</span><span class="params">(url)</span>:</span></div><div class="line">    cmd = <span class="string">'phantomjs phantomjs/pro_toutiao.js "%s"'</span> % url</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'cmd:'</span>, cmd</div><div class="line">        stdout, stderr = subprocess.Popen(cmd, shell=<span class="keyword">True</span>, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()</div><div class="line">        <span class="comment"># print 'err:', stderr</span></div><div class="line">    <span class="keyword">except</span> Exception, e:</div><div class="line">        logger.error(stderr)</div><div class="line">    <span class="keyword">return</span> <span class="number">200</span>, stdout</div></pre></td></tr></table></figure></p>
-<hr>
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><ul>
-<li><a href="http://blog.binux.me/2015/01/pyspider-tutorial-level-3-render-with-phantomjs/" target="_blank" rel="external">pyspider 爬虫教程</a></li>
-<li><a href="http://imweb.io/topic/560b402ac2317a8c3e08621c" target="_blank" rel="external">PhantomJS基础及示例</a></li>
-</ul>
-
-          
+</blockquote><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/22/使用Phantomjs抓取今日头条list页面/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
