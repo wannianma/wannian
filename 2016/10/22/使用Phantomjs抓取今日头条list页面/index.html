@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="pi,pyspider," />
+  <meta name="keywords" content="phantomjs,python,crawler," />
 
 
 
@@ -88,30 +88,36 @@
 
 
 
-<meta name="description" content="在Pi上安装pySpider查看python版本, pip是否安装12$ python --version$ pip -v
-安装pippip官方文档
+<meta name="description" content="写在前面，之前由于头条新闻列表页面改为js动态加载后，爬取程序崩了一次，但是由于当时当时列表API接口没有鉴权，所以选择直接请求API接口返回数据。但是好景不长，该接口添加了两个必填参数as和cp，导致list页面抓取失败！
+Note: 有些懒不能偷，出来混总是要还的
 
-使用get-pip.py安装
-linux使用软件管理器安装">
+
+解决方案：对两个as和cp生成逻辑研究了半天也没搞明白，只能选择使用phantomjs来解决。
+
+搭建Phantomjs环境c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派运行pyspider">
-<meta property="og:url" content="http://yoursite.com/2016/10/17/树莓派运行pyspider/index.html">
+<meta property="og:title" content="使用Phantomjs抓取今日头条list页面">
+<meta property="og:url" content="http://yoursite.com/2016/10/22/使用Phantomjs抓取今日头条list页面/index.html">
 <meta property="og:site_name" content="Wannian's Blog">
-<meta property="og:description" content="在Pi上安装pySpider查看python版本, pip是否安装12$ python --version$ pip -v
-安装pippip官方文档
+<meta property="og:description" content="写在前面，之前由于头条新闻列表页面改为js动态加载后，爬取程序崩了一次，但是由于当时当时列表API接口没有鉴权，所以选择直接请求API接口返回数据。但是好景不长，该接口添加了两个必填参数as和cp，导致list页面抓取失败！
+Note: 有些懒不能偷，出来混总是要还的
 
-使用get-pip.py安装
-linux使用软件管理器安装">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/6de47e09jw1f8ul5w5ghuj20gq04jgnm.jpg">
-<meta property="og:updated_time" content="2016-10-17T06:00:03.551Z">
+
+解决方案：对两个as和cp生成逻辑研究了半天也没搞明白，只能选择使用phantomjs来解决。
+
+搭建Phantomjs环境c">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6de47e09jw1f911fu6swrj20qe02taad.jpg">
+<meta property="og:updated_time" content="2016-10-22T06:46:41.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树莓派运行pyspider">
-<meta name="twitter:description" content="在Pi上安装pySpider查看python版本, pip是否安装12$ python --version$ pip -v
-安装pippip官方文档
+<meta name="twitter:title" content="使用Phantomjs抓取今日头条list页面">
+<meta name="twitter:description" content="写在前面，之前由于头条新闻列表页面改为js动态加载后，爬取程序崩了一次，但是由于当时当时列表API接口没有鉴权，所以选择直接请求API接口返回数据。但是好景不长，该接口添加了两个必填参数as和cp，导致list页面抓取失败！
+Note: 有些懒不能偷，出来混总是要还的
 
-使用get-pip.py安装
-linux使用软件管理器安装">
-<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/6de47e09jw1f8ul5w5ghuj20gq04jgnm.jpg">
+
+解决方案：对两个as和cp生成逻辑研究了半天也没搞明白，只能选择使用phantomjs来解决。
+
+搭建Phantomjs环境c">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/6de47e09jw1f911fu6swrj20qe02taad.jpg">
 
 
 
@@ -132,10 +138,10 @@ linux使用软件管理器安装">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/17/树莓派运行pyspider/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/22/使用Phantomjs抓取今日头条list页面/"/>
 
 
-  <title> 树莓派运行pyspider | Wannian's Blog </title>
+  <title> 使用Phantomjs抓取今日头条list页面 | Wannian's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +281,7 @@ linux使用软件管理器安装">
             
             
               
-                树莓派运行pyspider
+                使用Phantomjs抓取今日头条list页面
               
             
           </h1>
@@ -287,8 +293,8 @@ linux使用软件管理器安装">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-17T11:33:00+08:00" content="2016-10-17">
-              2016-10-17
+            <time itemprop="dateCreated" datetime="2016-10-22T14:42:42+08:00" content="2016-10-22">
+              2016-10-22
             </time>
           </span>
 
@@ -298,8 +304,8 @@ linux使用软件管理器安装">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/17/树莓派运行pyspider/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/17/树莓派运行pyspider/" itemprop="commentsCount"></span>
+                <a href="/2016/10/22/使用Phantomjs抓取今日头条list页面/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/22/使用Phantomjs抓取今日头条list页面/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -322,46 +328,27 @@ linux使用软件管理器安装">
       
 
       
-        <h1 id="在Pi上安装pySpider"><a href="#在Pi上安装pySpider" class="headerlink" title="在Pi上安装pySpider"></a>在Pi上安装pySpider</h1><h3 id="查看python版本-pip是否安装"><a href="#查看python版本-pip是否安装" class="headerlink" title="查看python版本, pip是否安装"></a>查看python版本, pip是否安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python --version</div><div class="line">$ pip -v</div></pre></td></tr></table></figure>
-<h3 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h3><p><a href="https://pip.pypa.io/en/stable/" target="_blank" rel="external">pip官方文档</a></p>
+        <p>写在前面，之前由于头条新闻列表页面改为js动态加载后，爬取程序崩了一次，但是由于当时当时列表API接口没有鉴权，所以选择直接请求API接口返回数据。但是好景不长，该接口添加了两个必填参数<code>as</code>和<code>cp</code>，导致list页面抓取失败！</p>
+<p><img src="http://ww3.sinaimg.cn/large/6de47e09jw1f911fu6swrj20qe02taad.jpg" alt=""><br><blockquote class="blockquote-center"><p>Note: 有些懒不能偷，出来混总是要还的</p>
+</blockquote></p>
+<blockquote>
+<p>解决方案：对两个<code>as</code>和<code>cp</code>生成逻辑研究了半天也没搞明白，只能选择使用phantomjs来解决。</p>
+</blockquote>
+<h2 id="搭建Phantomjs环境"><a href="#搭建Phantomjs环境" class="headerlink" title="搭建Phantomjs环境"></a>搭建Phantomjs环境</h2><p>check了一下服务器的信息，发现两台Server的配置差不多，直接将A服务器的二进制文件拷过来使用。</p>
 <ul>
-<li>使用get-pip.py安装</li>
-<li><p><a href="https://packaging.python.org/install_requirements_linux/#installing-pip-setuptools-wheel-with-linux-package-managers" target="_blank" rel="external">linux使用软件管理器安装</a></p>
-<a id="more"></a>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># ubuntu</div><div class="line">$ sudo apt-get install python-pip</div><div class="line"># centos</div><div class="line">$ sudo yum install python-pip</div><div class="line"># Arch python2</div><div class="line">$ sudo pacman -S python2-pip</div><div class="line"># Arch python3</div><div class="line">$ sudo pacman -S python-pip</div></pre></td></tr></table></figure>
+<li><p>scp拷贝文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># scp -P 202xx -r phantomjs/ root@59.63.1xx.xx:/data/live</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>将Phantomjs加入到环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># vim /etc/profile</span></div><div class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/nginx/sbin:/usr/<span class="built_in">local</span>/php/bin:/usr/<span class="built_in">local</span>/mysql/bin:/data/crawler/phantomjs/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="使用pip安装Pyspider"><a href="#使用pip安装Pyspider" class="headerlink" title="使用pip安装Pyspider"></a>使用pip安装Pyspider</h3><p><a href="http://docs.pyspider.org/en/latest/#installation" target="_blank" rel="external">pyspider官方文档</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install pyspider</div></pre></td></tr></table></figure>
-<blockquote>
-<p>如果使用ubuntu或Debian，需要执行以下命令，否则会报各种稀奇古怪的错误（此坑已踩）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install python python-dev python-distribute python-pip libcurl4-openssl-dev libxml2-dev libxslt1-dev python-lxml libssl-dev zlib1g-dev</div></pre></td></tr></table></figure></p>
-</blockquote>
-<p>安装过程中遇到的问题：</p>
-<ul>
-<li><p>pip安装超时</p>
-<p>  <a href="https://segmentfault.com/q/1010000000162410" target="_blank" rel="external">参考文档</a></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 创建~/.pip/pip.conf,设置超时间</div><div class="line"># 内容如下</div><div class="line">[global]</div><div class="line">timeout=6000</div><div class="line"># 不建议直接修改源镜像地址，建议使用命令参数形式使用国内镜像地址</div><div class="line">$ pip install -i https://pypi.doubanio.com/simple/ 包名</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="为pyspider安装Phantomjs"><a href="#为pyspider安装Phantomjs" class="headerlink" title="为pyspider安装Phantomjs"></a>为pyspider安装Phantomjs</h3><p><a href="http://phantomjs.org/download.html" target="_blank" rel="external">phantomjs官方文档</a>,由于phantomjs编译需要较高的硬件条件和各种库的支持，树莓派可能无法编译。所以选择直接下载已编译好的二进制包进行使用。</p>
-<blockquote>
-<p>查看系统是32位还是64位的命令 <code>getconf LONG_BIT</code></p>
-</blockquote>
-<p>phantomjs官网给的Note：</p>
-<blockquote>
-<p>Note: For this static build, the binary is self-contained. There is no requirement to install Qt, WebKit, or any other libraries. It however still relies on Fontconfig (the package fontconfig or libfontconfig, depending on the distribution). The system must have GLIBCXX_3.4.9 and GLIBC_2.7.</p>
-</blockquote>
-<p>由于pi装的32位系统，所以下载的phantomjs也是32位的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tar -xjvf phantomjs-2.1.1-linux-i686.tar.bz2</div></pre></td></tr></table></figure></p>
-<p>目录结构为：</p>
-<p><img src="http://ww2.sinaimg.cn/large/6de47e09jw1f8ul5w5ghuj20gq04jgnm.jpg" alt=""></p>
-<p>最后一步将<code>phantomsjs</code>加入到系统变量中，让Pyspider可以检测到。具体为：</p>
-<ul>
-<li>修改<code>/etc/profile</code>文件，添加内容<code>export PATH=&quot;$PATH:/NEW_PATH&quot;</code>到文件最后一行</li>
-<li>执行<code>source /etc/profile</code>使插入内容生效</li>
-</ul>
-<p>遇到的问题：</p>
-<ul>
-<li><code>-bash: /home/pi/data/phantomjs/bin/phantomjs32: cannot execute binary file: Exec format error</code></li>
+<h2 id="Phantomjs代码编写"><a href="#Phantomjs代码编写" class="headerlink" title="Phantomjs代码编写"></a>Phantomjs代码编写</h2><p>由于只需要加载出今日头条第一页即可，所以使用最简单的获取<code>page.content</code>即可。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create(),</div><div class="line">    system = <span class="built_in">require</span>(<span class="string">'system'</span>),</div><div class="line">    url;</div><div class="line"></div><div class="line"><span class="comment">//page.viewportSize = &#123;width: 4800,height: 8000&#125;;</span></div><div class="line">page.settings.loadImages = <span class="literal">false</span>;</div><div class="line">page.settings.userAgent = <span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36'</span>;</div><div class="line">page.settings.resourceTimeout = <span class="number">5000</span>;</div><div class="line">page.onConsoleMessage = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(msg);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (system.args.length === <span class="number">1</span>) &#123;</div><div class="line">    phantom.exit(<span class="number">1</span>);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    url = system.args[<span class="number">1</span>];</div><div class="line">    page.open(url, <span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (status !== <span class="string">'success'</span>) &#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'FAIL to load the address'</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">console</span>.log(page.content);</div><div class="line">        phantom.exit();</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="python代码获取Phantomjs输出内容"><a href="#python代码获取Phantomjs输出内容" class="headerlink" title="python代码获取Phantomjs输出内容"></a>python代码获取Phantomjs输出内容</h4><p>通过python代码执行命令行程序，获取命令行输出的方式得到页面内容<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 执行phantomjs获取网页内容</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_fetch_html_by_phantomjs</span><span class="params">(url)</span>:</span></div><div class="line">    cmd = <span class="string">'phantomjs phantomjs/pro_toutiao.js "%s"'</span> % url</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'cmd:'</span>, cmd</div><div class="line">        stdout, stderr = subprocess.Popen(cmd, shell=<span class="keyword">True</span>, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()</div><div class="line">        <span class="comment"># print 'err:', stderr</span></div><div class="line">    <span class="keyword">except</span> Exception, e:</div><div class="line">        logger.error(stderr)</div><div class="line">    <span class="keyword">return</span> <span class="number">200</span>, stdout</div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><ul>
+<li><a href="http://blog.binux.me/2015/01/pyspider-tutorial-level-3-render-with-phantomjs/" target="_blank" rel="external">pyspider 爬虫教程</a></li>
+<li><a href="http://imweb.io/topic/560b402ac2317a8c3e08621c" target="_blank" rel="external">PhantomJS基础及示例</a></li>
 </ul>
 
       
@@ -385,9 +372,11 @@ linux使用软件管理器安装">
       
         <div class="post-tags">
           
-            <a href="/tags/pi/" rel="tag">#pi</a>
+            <a href="/tags/phantomjs/" rel="tag">#phantomjs</a>
           
-            <a href="/tags/pyspider/" rel="tag">#pyspider</a>
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+            <a href="/tags/crawler/" rel="tag">#crawler</a>
           
         </div>
       
@@ -396,17 +385,13 @@ linux使用软件管理器安装">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/17/hello-world/" rel="next" title="hexo升级属性">
-                <i class="fa fa-chevron-left"></i> hexo升级属性
+              <a href="/2016/10/20/修改Centos7笔记本盒盖后默认睡眠行为/" rel="next" title="修改Centos7笔记本盒盖后默认睡眠行为">
+                <i class="fa fa-chevron-left"></i> 修改Centos7笔记本盒盖后默认睡眠行为
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/18/you-get源码分析/" rel="prev" title="you-get源码分析">
-                you-get源码分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -421,10 +406,10 @@ linux使用软件管理器安装">
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/17/树莓派运行pyspider/"
-     data-title="树莓派运行pyspider"
+        <div class="ds-share flat" data-thread-key="2016/10/22/使用Phantomjs抓取今日头条list页面/"
+     data-title="使用Phantomjs抓取今日头条list页面"
      data-content=""
-     data-url="http://yoursite.com/2016/10/17/树莓派运行pyspider/">
+     data-url="http://yoursite.com/2016/10/22/使用Phantomjs抓取今日头条list页面/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -451,8 +436,8 @@ linux使用软件管理器安装">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/17/树莓派运行pyspider/"
-           data-title="树莓派运行pyspider" data-url="http://yoursite.com/2016/10/17/树莓派运行pyspider/">
+      <div class="ds-thread" data-thread-key="2016/10/22/使用Phantomjs抓取今日头条list页面/"
+           data-title="使用Phantomjs抓取今日头条list页面" data-url="http://yoursite.com/2016/10/22/使用Phantomjs抓取今日头条list页面/">
       </div>
     
   </div>
@@ -588,7 +573,7 @@ linux使用软件管理器安装">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在Pi上安装pySpider"><span class="nav-text">在Pi上安装pySpider</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看python版本-pip是否安装"><span class="nav-text">查看python版本, pip是否安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装pip"><span class="nav-text">安装pip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用pip安装Pyspider"><span class="nav-text">使用pip安装Pyspider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为pyspider安装Phantomjs"><span class="nav-text">为pyspider安装Phantomjs</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建Phantomjs环境"><span class="nav-text">搭建Phantomjs环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phantomjs代码编写"><span class="nav-text">Phantomjs代码编写</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python代码获取Phantomjs输出内容"><span class="nav-text">python代码获取Phantomjs输出内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-text">参考：</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
