@@ -92,18 +92,21 @@
 卸载1.7.1版本Git1# yum remove git
 下载git2.10.0并安装12345678910# wget https">
 <meta property="og:type" content="article">
-<meta property="og:title" content="升级CentOS下Git 1.7.1-> 2.10.0">
+<meta property="og:title" content="升级CentOS下Git 1.7.1-> 2.10.0，配置git无密码登录">
 <meta property="og:url" content="http://yoursite.com/2016/10/29/升级centos下git 1-71/index.html">
 <meta property="og:site_name" content="Wannian's Blog">
 <meta property="og:description" content="安装准备12# yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc# yum install  gcc perl-ExtUtils-MakeMaker
 卸载1.7.1版本Git1# yum remove git
 下载git2.10.0并安装12345678910# wget https">
-<meta property="og:updated_time" content="2016-10-29T03:49:46.914Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6de47e09jw1f9kilrznluj20pk04qdj0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6de47e09jw1f9kiniyf68j20l20br0tb.jpg">
+<meta property="og:updated_time" content="2016-11-08T03:17:53.042Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="升级CentOS下Git 1.7.1-> 2.10.0">
+<meta name="twitter:title" content="升级CentOS下Git 1.7.1-> 2.10.0，配置git无密码登录">
 <meta name="twitter:description" content="安装准备12# yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc# yum install  gcc perl-ExtUtils-MakeMaker
 卸载1.7.1版本Git1# yum remove git
 下载git2.10.0并安装12345678910# wget https">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/6de47e09jw1f9kilrznluj20pk04qdj0.jpg">
 
 
 
@@ -127,7 +130,7 @@
   <link rel="canonical" href="http://yoursite.com/2016/10/29/升级centos下git 1-71/"/>
 
 
-  <title> 升级CentOS下Git 1.7.1-> 2.10.0 | Wannian's Blog </title>
+  <title> 升级CentOS下Git 1.7.1-> 2.10.0，配置git无密码登录 | Wannian's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +270,7 @@
             
             
               
-                升级CentOS下Git 1.7.1-> 2.10.0
+                升级CentOS下Git 1.7.1-> 2.10.0，配置git无密码登录
               
             
           </h1>
@@ -317,7 +320,21 @@
         <h3 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc</span></div><div class="line"><span class="comment"># yum install  gcc perl-ExtUtils-MakeMaker</span></div></pre></td></tr></table></figure>
 <h3 id="卸载1-7-1版本Git"><a href="#卸载1-7-1版本Git" class="headerlink" title="卸载1.7.1版本Git"></a>卸载1.7.1版本Git</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># yum remove git</span></div></pre></td></tr></table></figure>
 <h3 id="下载git2-10-0并安装"><a href="#下载git2-10-0并安装" class="headerlink" title="下载git2.10.0并安装"></a>下载git2.10.0并安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># wget https://codeload.github.com/git/git/tar.gz/v2.10.0</span></div><div class="line"><span class="comment"># tar xzvf v2.10.0</span></div><div class="line"><span class="comment"># cd git-2.10.0</span></div><div class="line"><span class="comment"># make configure</span></div><div class="line"><span class="comment"># ./configure --prefix=/usr/local/git</span></div><div class="line"><span class="comment"># make</span></div><div class="line"><span class="comment"># make install</span></div><div class="line">// 添加到环境变量中</div><div class="line"><span class="comment"># echo "export PATH=$PATH:/usr/local/git/bin" &gt;&gt; /etc/bashrc</span></div><div class="line"><span class="comment"># source /etc/bashrc</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="查看是否安装成功"><a href="#查看是否安装成功" class="headerlink" title="查看是否安装成功"></a>查看是否安装成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># git --version</span></div></pre></td></tr></table></figure>
+<h3 id="git无密码登录"><a href="#git无密码登录" class="headerlink" title="git无密码登录"></a>git无密码登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># git config --global user.name "wannian"</span></div><div class="line"><span class="comment"># git config --global user.email "wannianma@foxmail.com"</span></div><div class="line"></div><div class="line"><span class="comment"># ssh-keygen -C "wannianma@foxmail.com"</span></div></pre></td></tr></table></figure>
+<p>将公钥复制到Oschina上，公钥默认位置<code>.ssh/id_rsa.pub(public key)</code><br><img src="http://ww1.sinaimg.cn/large/6de47e09jw1f9kilrznluj20pk04qdj0.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/6de47e09jw1f9kiniyf68j20l20br0tb.jpg" alt=""></p>
+<p>验证是否配置成功<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># ssh git@github.com (For Github)</span></div><div class="line"><span class="comment"># ssh ssh -T git@git.oschina.net (For oschina)</span></div></pre></td></tr></table></figure></p>
+<h3 id="git远程仓库"><a href="#git远程仓库" class="headerlink" title="git远程仓库"></a>git远程仓库</h3><p>初始化本地仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># git init</span></div></pre></td></tr></table></figure></p>
+<p>将本地仓库与远程仓库关联<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># git remote add origin git@git.oschina.net:xxxx/NewsCrawler.git</span></div></pre></td></tr></table></figure></p>
+<p>添加后，远程库的名字即为<code>origin</code>。接下来，就需要将本地仓库内容推送到远程仓库上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master</div></pre></td></tr></table></figure></p>
+<p>把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。</p>
+<p>由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<blockquote>
+<p>遇到错误：<code>error: src refspec master does not match any.</code></p>
+<p>原因：不能推送空目录，即当前文件夹是未Add内容<br>  解决方案：<br>  配置<code>.gitignore</code>文件，然后添加文件<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># git add *</span></div><div class="line"><span class="comment"># git commit -m "xx"</span></div><div class="line"><span class="comment"># git push origin master</span></div></pre></td></tr></table></figure></p>
+</blockquote>
 
       
     </div>
@@ -373,7 +390,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2016/10/29/升级centos下git 1-71/"
-     data-title="升级CentOS下Git 1.7.1-> 2.10.0"
+     data-title="升级CentOS下Git 1.7.1-> 2.10.0，配置git无密码登录"
      data-content=""
      data-url="http://yoursite.com/2016/10/29/升级centos下git 1-71/">
   <div class="ds-share-inline">
@@ -403,7 +420,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/10/29/升级centos下git 1-71/"
-           data-title="升级CentOS下Git 1.7.1-> 2.10.0" data-url="http://yoursite.com/2016/10/29/升级centos下git 1-71/">
+           data-title="升级CentOS下Git 1.7.1-> 2.10.0，配置git无密码登录" data-url="http://yoursite.com/2016/10/29/升级centos下git 1-71/">
       </div>
     
   </div>
@@ -539,7 +556,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装准备"><span class="nav-text">安装准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载1-7-1版本Git"><span class="nav-text">卸载1.7.1版本Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载git2-10-0并安装"><span class="nav-text">下载git2.10.0并安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看是否安装成功"><span class="nav-text">查看是否安装成功</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装准备"><span class="nav-text">安装准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载1-7-1版本Git"><span class="nav-text">卸载1.7.1版本Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载git2-10-0并安装"><span class="nav-text">下载git2.10.0并安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看是否安装成功"><span class="nav-text">查看是否安装成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git无密码登录"><span class="nav-text">git无密码登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git远程仓库"><span class="nav-text">git远程仓库</span></a></li></ol></div>
             
           </div>
         </section>

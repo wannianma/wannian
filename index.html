@@ -264,7 +264,7 @@
               
                 
                 <a class="post-title-link" href="/2016/10/29/升级centos下git 1-71/" itemprop="url">
-                  升级CentOS下Git 1.7.1-> 2.10.0
+                  升级CentOS下Git 1.7.1-> 2.10.0，配置git无密码登录
                 </a>
               
             
@@ -313,13 +313,14 @@
 
       
         
-          
-            <h3 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc</span></div><div class="line"><span class="comment"># yum install  gcc perl-ExtUtils-MakeMaker</span></div></pre></td></tr></table></figure>
+          <h3 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc</span></div><div class="line"><span class="comment"># yum install  gcc perl-ExtUtils-MakeMaker</span></div></pre></td></tr></table></figure>
 <h3 id="卸载1-7-1版本Git"><a href="#卸载1-7-1版本Git" class="headerlink" title="卸载1.7.1版本Git"></a>卸载1.7.1版本Git</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># yum remove git</span></div></pre></td></tr></table></figure>
 <h3 id="下载git2-10-0并安装"><a href="#下载git2-10-0并安装" class="headerlink" title="下载git2.10.0并安装"></a>下载git2.10.0并安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># wget https://codeload.github.com/git/git/tar.gz/v2.10.0</span></div><div class="line"><span class="comment"># tar xzvf v2.10.0</span></div><div class="line"><span class="comment"># cd git-2.10.0</span></div><div class="line"><span class="comment"># make configure</span></div><div class="line"><span class="comment"># ./configure --prefix=/usr/local/git</span></div><div class="line"><span class="comment"># make</span></div><div class="line"><span class="comment"># make install</span></div><div class="line">// 添加到环境变量中</div><div class="line"><span class="comment"># echo "export PATH=$PATH:/usr/local/git/bin" &gt;&gt; /etc/bashrc</span></div><div class="line"><span class="comment"># source /etc/bashrc</span></div></pre></td></tr></table></figure>
-<h3 id="查看是否安装成功"><a href="#查看是否安装成功" class="headerlink" title="查看是否安装成功"></a>查看是否安装成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># git --version</span></div></pre></td></tr></table></figure>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/29/升级centos下git 1-71/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
