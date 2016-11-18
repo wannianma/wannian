@@ -313,32 +313,17 @@
 
       
         
-          
-            <h3 id="本地xshell配置"><a href="#本地xshell配置" class="headerlink" title="本地xshell配置"></a>本地xshell配置</h3><ul>
+          <h3 id="本地xshell配置"><a href="#本地xshell配置" class="headerlink" title="本地xshell配置"></a>本地xshell配置</h3><ul>
 <li><p>新建会话，填写名称与主机地址</p>
 </li>
 <li><p>进入<code>用户身份验证选项</code>,选择<code>Public Key</code>验证方法<br><img src="http://ww4.sinaimg.cn/mw690/6de47e09jw1f9w1g9xfrij20fp07yabc.jpg" alt=""></p>
 </li>
-<li><p>若未生成过秘钥，点击<code>浏览</code>-&gt;<code>生成</code>,如下图<br><img src="http://ww3.sinaimg.cn/mw690/6de47e09jw1f9w1jg03c6j20cb07dmxq.jpg" alt=""><br><img src="http://ww4.sinaimg.cn/mw690/6de47e09jw1f9w1jg01nrj20d30agabb.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/mw690/6de47e09jw1f9w1jg0ugdj20d30agabu.jpg" alt=""></p>
-</li>
-<li><p>填写密钥名称，密码信息可以不填写<br><img src="http://ww1.sinaimg.cn/mw690/6de47e09jw1f9w1jg0vzvj20d30ag3zl.jpg" alt=""></p>
-</li>
-<li><p>生成公钥-密钥对，复制<code>公钥</code>，并将其注册到阿里云服务器上<br><img src="http://ww1.sinaimg.cn/mw690/6de47e09jw1f9w1jg1mn9j20d30agwh2.jpg" alt=""></p>
-</li>
-<li><p>最后，在<code>用户身份验证选项</code>中选择新生成的密钥即可。<br><img src="http://ww2.sinaimg.cn/mw690/6de47e09jw1f9w1q8bu6dj20b3084aax.jpg" alt=""></p>
-</li>
 </ul>
-<h3 id="阿里云Server端"><a href="#阿里云Server端" class="headerlink" title="阿里云Server端"></a>阿里云Server端</h3><ul>
-<li>登录到云主机</li>
-<li>进入.ssh/文件夹 <code>cd  /root/.ssh/</code></li>
-<li><p>将客户端公钥放入云主机识别keys文件夹中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat id_rsa.pub &gt;&gt; authorized_keys</div></pre></td></tr></table></figure>
-</li>
-<li><p>销毁公钥 <code>rm id_rsa.pub</code></p>
-</li>
-</ul>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/18/xshell无密码登录阿里云/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
