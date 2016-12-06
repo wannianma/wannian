@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="you-get,bilibili," />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -88,22 +88,16 @@
 
 
 
-<meta name="description" content="今天试了下用you-get下B站的视频，简单看了下源码，有不少值得借鉴的地方！
-
-动态地改变Python搜索路径1234_srcdir = &apos;%s/src/&apos; % os.path.dirname(os.path.realpath(__file__))# Sys.argv[]是用来获取命令行参数的，sys.argv[0]表示代码本身文件路径_filepath = os.path.dirname(s">
+<meta name="description" content="distinct本来就是针对 “多列”的，如果想让单个列“distinct”，用group by1234567891011121314151617181920212223242526mysql&amp;gt; select a,b from abc;+------+------+| a    | b    |+------+------+|    7 |    9 ||    7 |    1 ||">
 <meta property="og:type" content="article">
-<meta property="og:title" content="you-get源码分析">
-<meta property="og:url" content="http://yoursite.com/2016/10/18/you-get源码分析/index.html">
+<meta property="og:title" content="mysql多列distinct vs group by">
+<meta property="og:url" content="http://yoursite.com/2016/12/06/mysql多列distinct-md/index.html">
 <meta property="og:site_name" content="Wannian's Blog">
-<meta property="og:description" content="今天试了下用you-get下B站的视频，简单看了下源码，有不少值得借鉴的地方！
-
-动态地改变Python搜索路径1234_srcdir = &apos;%s/src/&apos; % os.path.dirname(os.path.realpath(__file__))# Sys.argv[]是用来获取命令行参数的，sys.argv[0]表示代码本身文件路径_filepath = os.path.dirname(s">
-<meta property="og:updated_time" content="2016-10-19T06:38:59.189Z">
+<meta property="og:description" content="distinct本来就是针对 “多列”的，如果想让单个列“distinct”，用group by1234567891011121314151617181920212223242526mysql&amp;gt; select a,b from abc;+------+------+| a    | b    |+------+------+|    7 |    9 ||    7 |    1 ||">
+<meta property="og:updated_time" content="2016-12-06T09:31:41.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="you-get源码分析">
-<meta name="twitter:description" content="今天试了下用you-get下B站的视频，简单看了下源码，有不少值得借鉴的地方！
-
-动态地改变Python搜索路径1234_srcdir = &apos;%s/src/&apos; % os.path.dirname(os.path.realpath(__file__))# Sys.argv[]是用来获取命令行参数的，sys.argv[0]表示代码本身文件路径_filepath = os.path.dirname(s">
+<meta name="twitter:title" content="mysql多列distinct vs group by">
+<meta name="twitter:description" content="distinct本来就是针对 “多列”的，如果想让单个列“distinct”，用group by1234567891011121314151617181920212223242526mysql&amp;gt; select a,b from abc;+------+------+| a    | b    |+------+------+|    7 |    9 ||    7 |    1 ||">
 
 
 
@@ -124,10 +118,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/18/you-get源码分析/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/12/06/mysql多列distinct-md/"/>
 
 
-  <title> you-get源码分析 | Wannian's Blog </title>
+  <title> mysql多列distinct vs group by | Wannian's Blog </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +261,7 @@
             
             
               
-                you-get源码分析
+                mysql多列distinct vs group by
               
             
           </h1>
@@ -279,8 +273,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-18T15:30:52+08:00" content="2016-10-18">
-              2016-10-18
+            <time itemprop="dateCreated" datetime="2016-12-06T17:29:46+08:00" content="2016-12-06">
+              2016-12-06
             </time>
           </span>
 
@@ -290,8 +284,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/18/you-get源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/you-get源码分析/" itemprop="commentsCount"></span>
+                <a href="/2016/12/06/mysql多列distinct-md/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/06/mysql多列distinct-md/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -314,28 +308,7 @@
       
 
       
-        <blockquote>
-<p>今天试了下用you-get下B站的视频，简单看了下源码，有不少值得借鉴的地方！</p>
-</blockquote>
-<h4 id="动态地改变Python搜索路径"><a href="#动态地改变Python搜索路径" class="headerlink" title="动态地改变Python搜索路径"></a>动态地改变Python搜索路径</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">_srcdir = <span class="string">'%s/src/'</span> % os.path.dirname(os.path.realpath(__file__))</div><div class="line"><span class="comment"># Sys.argv[]是用来获取命令行参数的，sys.argv[0]表示代码本身文件路径</span></div><div class="line">_filepath = os.path.dirname(sys.argv[<span class="number">0</span>])</div><div class="line">sys.path.insert(<span class="number">1</span>, os.path.join(_filepath, _srcdir))</div></pre></td></tr></table></figure>
-<p>模块必须处于Python搜索路径中才能被导入，但你不想设置个永久性的大路径，因为那样可能会影响性能，所以，你希望能够动态地改变这个路径。</p>
-<blockquote>
-<p>解决方案</p>
-</blockquote>
-<p>只需简单地在Python的sys.path中加入一个”目录”，不过要小心重复的情况</p>
-<blockquote>
-<p>每个py文件被称之为模块，每个具有<strong>init</strong>.py文件的目录被称为包,只要模 块或者包所在的目录在sys.path中，就可以使用import 模块或import 包来使用。</p>
-</blockquote>
-<a id="more"></a>
-<h4 id="from-main-import"><a href="#from-main-import" class="headerlink" title="from .__main__ import *"></a><code>from .__main__ import *</code></h4><ul>
-<li>If the import module in the same dir, use e.g: <code>from . import core</code></li>
-<li>If the import module in the top dir, use e.g: <code>from .. import core</code></li>
-<li>If the import module in the other subdir, use e.g: <code>from ..other import core</code></li>
-</ul>
-<h4 id="python列表生成器"><a href="#python列表生成器" class="headerlink" title="python列表生成器"></a>python列表生成器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">bilibili_download_by_cids</span><span class="params">(cids, title, output_dir=<span class="string">'.'</span>, merge=True, info_only=False)</span>:</span></div><div class="line">    urls = []</div><div class="line">    <span class="keyword">for</span> cid <span class="keyword">in</span> cids:</div><div class="line">        sign_this = hashlib.md5(bytes(<span class="string">'cid=&#123;cid&#125;&amp;from=miniplay&amp;player=1&#123;SECRETKEY_MINILOADER&#125;'</span>.format(cid = cid, SECRETKEY_MINILOADER = SECRETKEY_MINILOADER), <span class="string">'utf-8'</span>)).hexdigest()</div><div class="line">        url = <span class="string">'http://interface.bilibili.com/playurl?&amp;cid='</span> + cid + <span class="string">'&amp;from=miniplay&amp;player=1'</span> + <span class="string">'&amp;sign='</span> + sign_this</div><div class="line">        urls += [i</div><div class="line">                 <span class="keyword">if</span> <span class="keyword">not</span> re.match(<span class="string">r'.*\.qqvideo\.tc\.qq\.com'</span>, i)</div><div class="line">                 <span class="keyword">else</span> re.sub(<span class="string">r'.*\.qqvideo\.tc\.qq\.com'</span>, <span class="string">'http://vsrc.store.qq.com'</span>, i)</div><div class="line">                 <span class="keyword">for</span> i <span class="keyword">in</span> parse_cid_playurl(get_content(url))]</div><div class="line"></div><div class="line">    type_ = <span class="string">''</span></div><div class="line">    size = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> urls:</div><div class="line">        _, type_, temp = url_info(url)</div><div class="line">        size += temp</div><div class="line"></div><div class="line">    print_info(site_info, title, type_, size)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> info_only:</div><div class="line">        download_urls(urls, title, type_, total_size=<span class="keyword">None</span>, output_dir=output_dir, merge=merge)</div></pre></td></tr></table></figure>
-<blockquote>
-<p>参考 <code>c = a if a&gt;b else b</code></p>
-</blockquote>
+        <h4 id="distinct本来就是针对-“多列”的，如果想让单个列“distinct”，用group-by"><a href="#distinct本来就是针对-“多列”的，如果想让单个列“distinct”，用group-by" class="headerlink" title="distinct本来就是针对 “多列”的，如果想让单个列“distinct”，用group by"></a>distinct本来就是针对 “多列”的，如果想让单个列“distinct”，用group by</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select a,b from abc;</div><div class="line">+------+------+</div><div class="line">| a    | b    |</div><div class="line">+------+------+</div><div class="line">|    7 |    9 |</div><div class="line">|    7 |    1 |</div><div class="line">|    7 |    1 |</div><div class="line">+------+------+</div><div class="line">3 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select distinct a,b from abc;</div><div class="line">+------+------+</div><div class="line">| a    | b    |</div><div class="line">+------+------+</div><div class="line">|    7 |    9 |</div><div class="line">|    7 |    1 |</div><div class="line">+------+------+</div><div class="line">2 rows in set (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; select a, max(b) from abc group by a;</div><div class="line">+------+--------+</div><div class="line">| a    | max(b) |</div><div class="line">+------+--------+</div><div class="line">|    7 |      9 |</div><div class="line">+------+--------+</div><div class="line">1 row in set (0.01 sec)</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -358,9 +331,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/you-get/" rel="tag">#you-get</a>
-          
-            <a href="/tags/bilibili/" rel="tag">#bilibili</a>
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
           
         </div>
       
@@ -369,17 +340,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/17/树莓派运行pyspider/" rel="next" title="树莓派运行pyspider">
-                <i class="fa fa-chevron-left"></i> 树莓派运行pyspider
+              <a href="/2016/11/18/xshell无密码登录阿里云/" rel="next" title="xshell无密码登录阿里云">
+                <i class="fa fa-chevron-left"></i> xshell无密码登录阿里云
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/20/配置笔记本上centos7连接Wifi/" rel="prev" title="配置笔记本上centos7连接Wifi">
-                配置笔记本上centos7连接Wifi <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -394,10 +361,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/18/you-get源码分析/"
-     data-title="you-get源码分析"
+        <div class="ds-share flat" data-thread-key="2016/12/06/mysql多列distinct-md/"
+     data-title="mysql多列distinct vs group by"
      data-content=""
-     data-url="http://yoursite.com/2016/10/18/you-get源码分析/">
+     data-url="http://yoursite.com/2016/12/06/mysql多列distinct-md/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -424,8 +391,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/18/you-get源码分析/"
-           data-title="you-get源码分析" data-url="http://yoursite.com/2016/10/18/you-get源码分析/">
+      <div class="ds-thread" data-thread-key="2016/12/06/mysql多列distinct-md/"
+           data-title="mysql多列distinct vs group by" data-url="http://yoursite.com/2016/12/06/mysql多列distinct-md/">
       </div>
     
   </div>
@@ -561,7 +528,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态地改变Python搜索路径"><span class="nav-text">动态地改变Python搜索路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#from-main-import"><span class="nav-text">from .__main__ import *</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python列表生成器"><span class="nav-text">python列表生成器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct本来就是针对-“多列”的，如果想让单个列“distinct”，用group-by"><span class="nav-text">distinct本来就是针对 “多列”的，如果想让单个列“distinct”，用group by</span></a></li></ol></div>
             
           </div>
         </section>
