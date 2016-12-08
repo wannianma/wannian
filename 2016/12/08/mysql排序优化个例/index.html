@@ -1,0 +1,732 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mysql,Index," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1、sql优化表结构1234567891011121314151617181920212223242526CREATE TABLE `sy_comment_data_1` (	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT &apos;评论ID&apos;,	`commentid` CHAR(30) NOT NULL DEFAULT &apos;&apos; COMMENT &apos;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql排序案例索引优化.md">
+<meta property="og:url" content="http://yoursite.com/2016/12/08/mysql排序优化个例/index.html">
+<meta property="og:site_name" content="Wannian's Blog">
+<meta property="og:description" content="1、sql优化表结构1234567891011121314151617181920212223242526CREATE TABLE `sy_comment_data_1` (	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT &apos;评论ID&apos;,	`commentid` CHAR(30) NOT NULL DEFAULT &apos;&apos; COMMENT &apos;">
+<meta property="og:updated_time" content="2016-12-08T01:54:03.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql排序案例索引优化.md">
+<meta name="twitter:description" content="1、sql优化表结构1234567891011121314151617181920212223242526CREATE TABLE `sy_comment_data_1` (	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT &apos;评论ID&apos;,	`commentid` CHAR(30) NOT NULL DEFAULT &apos;&apos; COMMENT &apos;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/08/mysql排序优化个例/"/>
+
+
+  <title> mysql排序案例索引优化.md | Wannian's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?c1d3637f57201da0bc395326c4905e88";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Wannian's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mysql排序案例索引优化.md
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-08T09:49:42+08:00" content="2016-12-08">
+              2016-12-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/08/mysql排序优化个例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/08/mysql排序优化个例/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、sql优化"><a href="#1、sql优化" class="headerlink" title="1、sql优化"></a>1、sql优化</h3><h4 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`sy_comment_data_1`</span> (</div><div class="line">	<span class="string">`id`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'评论ID'</span>,</div><div class="line">	<span class="string">`commentid`</span> <span class="built_in">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'评论ID号'</span>,</div><div class="line">	<span class="string">`siteid`</span> <span class="built_in">SMALLINT</span>(<span class="number">5</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'站点ID'</span>,</div><div class="line">	<span class="string">`userid`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">UNSIGNED</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'用户ID'</span>,</div><div class="line">	<span class="string">`username`</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'用户名'</span>,</div><div class="line">	<span class="string">`creat_at`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'发布时间'</span>,</div><div class="line">	<span class="string">`ip`</span> <span class="built_in">VARCHAR</span>(<span class="number">15</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'用户IP地址'</span>,</div><div class="line">	<span class="string">`status`</span> TINYINT(<span class="number">1</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'评论状态&#123;0:未审核,-1:未通过审核,1:通过审核&#125;'</span>,</div><div class="line">	<span class="string">`content`</span> <span class="built_in">TEXT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'评论内容'</span>,</div><div class="line">	<span class="string">`direction`</span> TINYINT(<span class="number">1</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'评论方向&#123;0:无方向,1:正文,2:反方,3:中立&#125;'</span>,</div><div class="line">	<span class="string">`support`</span> MEDIUMINT(<span class="number">8</span>) <span class="keyword">UNSIGNED</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'支持数'</span>,</div><div class="line">	<span class="string">`reply`</span> TINYINT(<span class="number">1</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'是否为回复'</span>,</div><div class="line">	<span class="string">`comment_father_id`</span> <span class="built_in">INT</span>(<span class="number">11</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'属于哪条评论的回复'</span>,</div><div class="line">	<span class="string">`comment_reply_id`</span> <span class="built_in">INT</span>(<span class="number">11</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'直接回复的评论ID'</span>,</div><div class="line">	PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`commentid`</span> (<span class="string">`commentid`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`direction`</span> (<span class="string">`direction`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`siteid`</span> (<span class="string">`siteid`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`status`</span> (<span class="string">`status`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`comment_father_id`</span> (<span class="string">`comment_father_id`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`comment_reply_id`</span> (<span class="string">`comment_reply_id`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`userid`</span> (<span class="string">`userid`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`creat_at`</span> (<span class="string">`creat_at`</span>),</div><div class="line">	<span class="keyword">INDEX</span> <span class="string">`support`</span> (<span class="string">`support`</span>, <span class="string">`creat_at`</span>)</div><div class="line">);</div></pre></td></tr></table></figure>
+<h4 id="待优化sql"><a href="#待优化sql" class="headerlink" title="待优化sql"></a>待优化sql</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> userid,commentid,username,<span class="keyword">content</span> <span class="keyword">from</span> sy_comment_data_1 <span class="keyword">where</span> creat_at <span class="keyword">BETWEEN</span> <span class="number">1481072076</span> <span class="keyword">AND</span> <span class="number">1481158476</span> <span class="keyword">order</span> <span class="keyword">by</span> support <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">0</span>,<span class="number">8</span>;</div></pre></td></tr></table></figure>
+<h4 id="explain-结果"><a href="#explain-结果" class="headerlink" title="explain 结果"></a>explain 结果</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">+----+-------------+-------------------+-------+---------------+---------+---------+------+------+-------------+</div><div class="line">| id | select_type | table             | type  | possible_keys | key     | key_len | ref  | rows | Extra       |</div><div class="line">+----+-------------+-------------------+-------+---------------+---------+---------+------+------+-------------+</div><div class="line">|  1 | SIMPLE      | sy_comment_data_1 | index | creat_at      | support | 9       | NULL | 8827 | Using where |</div><div class="line">+----+-------------+-------------------+-------+---------------+---------+---------+------+------+-------------+</div><div class="line">1 row in set</div><div class="line">`</div></pre></td></tr></table></figure>
+<h4 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h4><p>删除support索引，为creat_at添加联合索引，使查询使用creat_at索引，而非support索引。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">INDEX `commentid` (`commentid`),</div><div class="line">INDEX `direction` (`direction`),</div><div class="line">INDEX `siteid` (`siteid`),</div><div class="line">INDEX `status` (`status`),</div><div class="line">INDEX `comment_father_id` (`comment_father_id`),</div><div class="line">INDEX `comment_reply_id` (`comment_reply_id`),</div><div class="line">INDEX `userid` (`userid`),</div><div class="line">INDEX `creat_at` (`creat_at`, `support`)</div></pre></td></tr></table></figure>
+<h4 id="优化后explain结果"><a href="#优化后explain结果" class="headerlink" title="优化后explain结果"></a>优化后explain结果</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mysql&gt; explain select userid,commentid,username,content from sy_comment_data_1 where creat_at BETWEEN 1481072076 AND 1481158476 order by support desc limit 0,8;</div><div class="line">+----+-------------+-------------------+-------+---------------+----------+---------+------+------+-----------------------------+</div><div class="line">| id | select_type | table             | type  | possible_keys | key      | key_len | ref  | rows | Extra                       |</div><div class="line">+----+-------------+-------------------+-------+---------------+----------+---------+------+------+-----------------------------+</div><div class="line">|  1 | SIMPLE      | sy_comment_data_1 | range | creat_at      | creat_at | 5       | NULL | 2056 | Using where; Using filesort |</div><div class="line">+----+-------------+-------------------+-------+---------------+----------+---------+------+------+-----------------------------+</div><div class="line">1 row in set</div></pre></td></tr></table></figure>
+<h3 id="2、explain参数介绍"><a href="#2、explain参数介绍" class="headerlink" title="2、explain参数介绍"></a>2、explain参数介绍</h3><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>select_type</td>
+<td>查询类型（simple,subquery,Union…)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>显示连接使用了何种类型（从好到差：const\eq_reg\ref\range\index\all)</td>
+</tr>
+<tr>
+<td>possible_keys</td>
+<td>显示可能应用的索引</td>
+</tr>
+<tr>
+<td>key</td>
+<td>实际使用的所用。NULL表示没有使用索引，可以在select语句中使用<code>use index</code>和<code>ignore index</code>来使用或忽略索引</td>
+</tr>
+<tr>
+<td>key_len</td>
+<td>使用的索引长度</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>指出对key列选择的索引使用的查找方式（常见值：const,func, null, 具体字段名)</td>
+</tr>
+<tr>
+<td>rows</td>
+<td>返回数据的长度</td>
+</tr>
+<tr>
+<td>Extra</td>
+<td>返回上述数据之外的其他信息</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
+          
+            <a href="/tags/Index/" rel="tag">#Index</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/06/mysql多列distinct-md/" rel="next" title="mysql多列distinct vs group by">
+                <i class="fa fa-chevron-left"></i> mysql多列distinct vs group by
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/08/mysql排序优化个例/"
+     data-title="mysql排序案例索引优化.md"
+     data-content=""
+     data-url="http://yoursite.com/2016/12/08/mysql排序优化个例/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/08/mysql排序优化个例/"
+           data-title="mysql排序案例索引优化.md" data-url="http://yoursite.com/2016/12/08/mysql排序优化个例/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww3.sinaimg.cn/large/6de47e09jw1f8v1r3fwuyj20c50c5jsd.jpg"
+               alt="Wannianma" />
+          <p class="site-author-name" itemprop="name">Wannianma</p>
+          <p class="site-description motion-element" itemprop="description">过日子，撸代码</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wannianma" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/wannianma" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/xiaonanzaizi" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/wannianma" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://shenyou.tv/" title="Shenyou.tv" target="_blank">Shenyou.tv</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、sql优化"><span class="nav-text">1、sql优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表结构"><span class="nav-text">表结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#待优化sql"><span class="nav-text">待优化sql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#explain-结果"><span class="nav-text">explain 结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化方案"><span class="nav-text">优化方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化后explain结果"><span class="nav-text">优化后explain结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、explain参数介绍"><span class="nav-text">2、explain参数介绍</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wannianma</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wangyh"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
