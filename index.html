@@ -263,6 +263,132 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/12/pyspider源码阅读/" itemprop="url">
+                  pyspider源码阅读—Tornado vs Flask
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-12T18:35:45+08:00" content="2016-12-12">
+              2016-12-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/12/pyspider源码阅读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/12/pyspider源码阅读/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Tornado-vs-Flask"><a href="#Tornado-vs-Flask" class="headerlink" title=" Tornado vs Flask"></a><1> Tornado vs Flask</1></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, host=None, port=None, debug=None, **options)</span>:</span></div><div class="line">    <span class="keyword">import</span> tornado.wsgi</div><div class="line">    <span class="keyword">import</span> tornado.ioloop</div><div class="line">    <span class="keyword">import</span> tornado.httpserver</div><div class="line">    <span class="keyword">import</span> tornado.web</div><div class="line"> </div><div class="line">    <span class="keyword">if</span> host <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        host = <span class="string">'127.0.0.1'</span></div><div class="line">    <span class="keyword">if</span> port <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        server_name = self.config[<span class="string">'SERVER_NAME'</span>]</div><div class="line">        <span class="keyword">if</span> server_name <span class="keyword">and</span> <span class="string">':'</span> <span class="keyword">in</span> server_name:</div><div class="line">            port = int(server_name.rsplit(<span class="string">':'</span>, <span class="number">1</span>)[<span class="number">1</span>])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            port = <span class="number">5000</span></div><div class="line">    <span class="keyword">if</span> debug <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">        self.debug = bool(debug)</div><div class="line"></div><div class="line">    hostname = host</div><div class="line">    port = port</div><div class="line">    application = self</div><div class="line">    use_reloader = self.debug</div><div class="line">    use_debugger = self.debug</div><div class="line"></div><div class="line">    <span class="keyword">if</span> use_debugger:</div><div class="line">        <span class="keyword">from</span> werkzeug.debug <span class="keyword">import</span> DebuggedApplication</div><div class="line">        application = DebuggedApplication(application, <span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">from</span> .webdav <span class="keyword">import</span> dav_app</div><div class="line">    <span class="keyword">except</span> ImportError <span class="keyword">as</span> e:</div><div class="line">        logger.warning(<span class="string">'WebDav interface not enabled: %r'</span>, e)</div><div class="line">        dav_app = <span class="keyword">None</span></div><div class="line">    <span class="keyword">if</span> dav_app:</div><div class="line">        <span class="keyword">from</span> werkzeug.wsgi <span class="keyword">import</span> DispatcherMiddleware</div><div class="line">        application = DispatcherMiddleware(application, &#123;</div><div class="line">            <span class="string">'/dav'</span>: dav_app</div><div class="line">        &#125;)</div><div class="line"></div><div class="line">    container = tornado.wsgi.WSGIContainer(application)</div><div class="line">    self.http_server = tornado.httpserver.HTTPServer(container)</div><div class="line">    self.http_server.listen(port, hostname)</div><div class="line">    <span class="keyword">if</span> use_reloader:</div><div class="line">        <span class="keyword">from</span> tornado <span class="keyword">import</span> autoreload</div><div class="line">        autoreload.start()</div><div class="line"></div><div class="line">    self.logger.info(<span class="string">'webui running on %s:%s'</span>, hostname, port)</div><div class="line">    self.ioloop = tornado.ioloop.IOLoop.current()</div><div class="line">    self.ioloop.start()</div></pre></td></tr></table></figure>
+<h4 id="tornado-wsgi-是Tornado框架对WSGI协议的支持模块"><a href="#tornado-wsgi-是Tornado框架对WSGI协议的支持模块" class="headerlink" title="tornado.wsgi 是Tornado框架对WSGI协议的支持模块."></a><a href="http://www.tornadoweb.org/en/stable/wsgi.html?highlight=wsgi" target="_blank" rel="external">tornado.wsgi</a> 是Tornado框架对<code>WSGI</code>协议的支持模块.</h4><p>WSGI协议是Python Web Server Gateway Interface的简称，它规定了一种在Web服务器与Web应用程序/框架之间推荐的标准接口，以确保Web应用程序在不同的Web服务器之间具有可移植性。有了通用的WSGI协议，Web开发者就能够任意选择适合自己的组合，而Web服务器和Web框架的开发者也能把精力集中到各自的领域。</p>
+<p>WSGI is the Python standard for web servers, and allows for interoperability between Tornado and other Python web frameworks and servers. </p>
+<p><code>tornado.wsgi</code>模块为WSGI协议提供了两方面的支持：</p>
+<ul>
+<li><code>WSGIAdapter</code> converts a tornado.web.Application to the WSGI application interface. This is useful for running a Tornado app on another HTTP server, such as Google App Engine. See the WSGIAdapter class documentation for limitations that apply.</li>
+<li><code>WSGIContainer</code> lets you run other WSGI applications and frameworks on the Tornado HTTP server. For example, with this class you can mix Django and Tornado handlers in a single server.</li>
+</ul>
+<p>支持WSGI的web app运行在Tornado上的示例代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">simple_app</span><span class="params">(environ, start_response)</span>:</span></div><div class="line">    status = <span class="string">"200 OK"</span></div><div class="line">    response_headers = [(<span class="string">"Content-type"</span>, <span class="string">"text/plain"</span>)]</div><div class="line">    start_response(status, response_headers)</div><div class="line">    <span class="keyword">return</span> [<span class="string">"Hello world!\n"</span>]</div><div class="line"></div><div class="line">container = tornado.wsgi.WSGIContainer(simple_app)</div><div class="line">http_server = tornado.httpserver.HTTPServer(container)</div><div class="line">http_server.listen(<span class="number">8888</span>)</div><div class="line">tornado.ioloop.IOLoop.current().start()</div></pre></td></tr></table></figure></p>
+<p>对比pyspider中的代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">container = tornado.wsgi.WSGIContainer(application)</div><div class="line">self.http_server = tornado.httpserver.HTTPServer(container)</div><div class="line">self.http_server.listen(port, hostname)</div><div class="line"><span class="keyword">if</span> use_reloader:</div><div class="line">    <span class="keyword">from</span> tornado <span class="keyword">import</span> autoreload</div><div class="line">    autoreload.start()</div><div class="line"></div><div class="line">self.logger.info(<span class="string">'webui running on %s:%s'</span>, hostname, port)</div><div class="line">self.ioloop = tornado.ioloop.IOLoop.current()</div><div class="line">self.ioloop.start()</div></pre></td></tr></table></figure></p>
+<p>可以看出，pyspider通过继承<code>Flask</code>,将Flask App实例运行在Tornado的<code>tornado.httpserver.HTTPServer</code>上。</p>
+<h4 id="werkzeug是一个WSGI实用程序库。"><a href="#werkzeug是一个WSGI实用程序库。" class="headerlink" title="werkzeug是一个WSGI实用程序库。"></a><a href="http://werkzeug.pocoo.org/" target="_blank" rel="external">werkzeug</a>是一个WSGI实用程序库。</h4><p>官方介绍如下：</p>
+<blockquote>
+<p>Werkzeug started as a simple collection of various utilities for WSGI applications and has become one of the most advanced WSGI utility modules. It includes a powerful debugger, fully featured request and response objects, HTTP utilities to handle entity tags, cache control headers, HTTP dates, cookie handling, file uploads, a powerful URL routing system and a bunch of community contributed addon modules.<br>It does Unicode and doesn’t enforce a specific template engine, database adapter or anything else. It doesn’t even enforce a specific way of handling requests and leaves all that up to the developer.</p>
+</blockquote>
+<p>其中：</p>
+<ul>
+<li><a href="http://werkzeug-docs-cn.readthedocs.io/zh_CN/latest/middlewares.html?highlight=DispatcherMiddleware#werkzeug.wsgi.DispatcherMiddleware" target="_blank" rel="external">DispatcherMiddleware</a><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">werkzeug</span>.<span class="title">wsgi</span>.<span class="title">DispatcherMiddleware</span><span class="params">(app, mounts=None)</span></span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Allows one to mount middlewares or applications in a WSGI application. This is useful if you want to combine multiple WSGI applications:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app = DispatcherMiddleware(app, &#123;</div><div class="line">    <span class="string">'/app2'</span>:        app2,</div><div class="line">    <span class="string">'/app3'</span>:        app3</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<ul>
+<li><a href="http://werkzeug-docs-cn.readthedocs.io/zh_CN/latest/debug.html?highlight=DebuggedApplication" target="_blank" rel="external">DebuggedApplication</a></li>
+</ul>
+<p>You can enable the debugger by wrapping the application in a DebuggedApplication middleware. Additionally there are parameters to the run_simple() function to enable it because this is a common task during development.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">werkzeug</span>.<span class="title">debug</span>.<span class="title">DebuggedApplication</span><span class="params">(app, evalex=False, request_key=<span class="string">'werkzeug.request'</span>, console_path=<span class="string">'/console'</span>, console_init_func=None, show_hidden_frames=False, lodgeit_url=None)</span></span></div></pre></td></tr></table></figure></p>
+<p>Enables debugging support for a given application:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> werkzeug.debug <span class="keyword">import</span> DebuggedApplication</div><div class="line"><span class="keyword">from</span> myapp <span class="keyword">import</span> app</div><div class="line">app = DebuggedApplication(app, evalex=<span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/08/mysql排序优化个例/" itemprop="url">
                   mysql排序案例索引优化
                 </a>
@@ -1199,113 +1325,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/17/树莓派运行pyspider/" itemprop="url">
-                  树莓派运行pyspider
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-17T11:33:00+08:00" content="2016-10-17">
-              2016-10-17
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/17/树莓派运行pyspider/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/17/树莓派运行pyspider/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="在Pi上安装pySpider"><a href="#在Pi上安装pySpider" class="headerlink" title="在Pi上安装pySpider"></a>在Pi上安装pySpider</h1><h3 id="查看python版本-pip是否安装"><a href="#查看python版本-pip是否安装" class="headerlink" title="查看python版本, pip是否安装"></a>查看python版本, pip是否安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ python --version</div><div class="line">$ pip -v</div></pre></td></tr></table></figure>
-<h3 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h3><p><a href="https://pip.pypa.io/en/stable/">pip官方文档</a></p>
-<ul>
-<li>使用get-pip.py安装</li>
-<li><p><a href="https://packaging.python.org/install_requirements_linux/#installing-pip-setuptools-wheel-with-linux-package-managers">linux使用软件管理器安装</a></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/17/树莓派运行pyspider/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1351,7 +1370,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1361,7 +1380,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
